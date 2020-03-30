@@ -7,27 +7,30 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 import pages.LoginPage;
+import pages.TransactionPartiesPage;
 
-public class LoginPageTest {
+public class TransactionPartiesPageTest {
 
     private WebDriver webDriver = driverInit();
     private String login = "Student";
     private String password = "909090";
-    By userMenuName = By.xpath(".//div[@class='pull-left info']");
+    private By userMenuName = By.xpath(".//div[@class='pull-left info']");
 
     private WebDriver driverInit() {
         WebDriverManager.chromedriver().setup();
-        PageFactory.initElements(this.webDriver, this);
         return new ChromeDriver();
     }
-    LoginPage loginPage = new LoginPage(webDriver);
+    private LoginPage loginPage = new LoginPage(webDriver);
+    private TransactionPartiesPage transactionParties = new TransactionPartiesPage(webDriver);
 
     @Test
-    public void loginToPage() {
+    public void goToDictionaryPage() {
         loginPage.loginToPage(login, password);
         Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
+
+        transactionParties.goToDictionaryPage();
+
     }
 
     @After
@@ -35,3 +38,4 @@ public class LoginPageTest {
         webDriver.quit();
     }
 }
+

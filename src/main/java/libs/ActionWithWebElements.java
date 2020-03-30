@@ -4,10 +4,11 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 
 public class ActionWithWebElements {
-//    private static LOGGER = LoggerFactory.getLogger(ActionWithWebElements.class);
 
     WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
@@ -46,22 +47,6 @@ public class ActionWithWebElements {
             return false;
         }
     }
-
-//    public void setCheckBox(By element, boolean state){
-//        WebElement checkBox = webDriver.findElement(element);
-//        try {
-//            if(checkBox.isSelected() == state) {
-//                logger.info("");
-//            }else {
-//                checkBox.click();
-//            }
-//            logger.info("");
-//
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            logger.error("");
-//        }
-//    }
 
     public void checkBox(By element) {
         WebElement checkBox = webDriver.findElement(element);
@@ -109,5 +94,8 @@ public class ActionWithWebElements {
         }
     }
 
+    public void waitForVisibilityOfElement(Wait<WebDriver> wait, By locatorType) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locatorType));
+    }
 
 }
