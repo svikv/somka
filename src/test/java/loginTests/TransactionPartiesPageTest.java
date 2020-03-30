@@ -25,12 +25,14 @@ public class TransactionPartiesPageTest {
     private TransactionPartiesPage transactionParties = new TransactionPartiesPage(webDriver);
 
     @Test
-    public void goToDictionaryPage() {
+    public void addRecord() {
         loginPage.loginToPage(login, password);
         Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
 
-        transactionParties.goToDictionaryPage();
-
+        int rawsBefore = transactionParties.countTableRawsBefore();
+        transactionParties.addRecordToTable();
+        int rawsAfter = transactionParties.countTableRawsAfter();
+        Assert.assertEquals("New record wasn't added to table", rawsBefore + 1, rawsAfter);
     }
 
     @After
@@ -38,4 +40,3 @@ public class TransactionPartiesPageTest {
         webDriver.quit();
     }
 }
-

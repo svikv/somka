@@ -16,34 +16,18 @@ public class TransactionPartiesPage {
 
     protected WebDriver webDriver;
     Wait<WebDriver> wait;
-    protected Logger logger = Logger.getLogger(getClass());
-    protected ActionWithWebElements actionWithWebElements;
-    private final static String  URL = "http://v3.test.itpmgroup.com";
+    private Logger logger = Logger.getLogger(getClass());
+    private ActionWithWebElements actionWithWebElements;
 
-    By dictionaryTab = By.xpath("//i[@class='fa fa-book']");
-    By transactionPartiesTab = By.id("prov_cus");
-    By addButton = By.xpath("//div[@class='box-tools']");
-
-    @FindBy(id = "prov_cus_proCustName")
-    private WebElement customerNameField;
-
-    @FindBy(id = "prov_cus_proCustAddress")
-    private WebElement customerAddressField;
-
-    @FindBy(id = "prov_cus_proCustPhone")
-    private WebElement customerPhoneField;
-
-    @FindBy(id = "prov_cus_proCustIsFl")
-    private WebElement isPrivatePersonCheckbox;
-
-    @FindBy(id = "add")
-    private WebElement createButton;
-
-    By table = By.xpath("//table[@id='device_list']//tbody//tr");
-
-    public void clickButton(By transactionPartiesTab){
-        actionWithWebElements.clickButton(transactionPartiesTab);
-    }
+    private By dictionaryTab = By.xpath("//i[@class='fa fa-book']");
+    private By transactionPartiesTab = By.id("prov_cus");
+    private By addButton = By.xpath("//div[@class='box-tools']");
+    private By customerNameField = By.id("prov_cus_proCustName");
+    private By customerAddressField = By.id("prov_cus_proCustAddress");
+    private By customerPhoneField = By.id("prov_cus_proCustPhone");
+    private By privatePersonCheckbox = By.id("prov_cus_proCustIsFl");
+    private By createButton = By.id("add");
+    private By table = By.xpath("//table[@id='device_list']//tbody//tr");
 
     public TransactionPartiesPage(WebDriver webDriver){
         this.webDriver = webDriver;
@@ -52,29 +36,37 @@ public class TransactionPartiesPage {
         wait = new WebDriverWait(webDriver, 1);
     }
 
-    public void goToDictionaryPage(){
-        webDriver.get(URL);
-        clickButton(dictionaryTab);
+    public void clickButton(By element){
+        actionWithWebElements.clickButton(element);
+    }
+
+    public void fillField(By element, String text){
+        actionWithWebElements.fillField(element,text);
+    }
+
+    public void waitForVisibilityOfElement(Wait<WebDriver> wait, By transactionPartiesTab){
         actionWithWebElements.waitForVisibilityOfElement(wait, transactionPartiesTab);
+    }
+
+    public int countTableRawsBefore(){
+        clickButton(dictionaryTab);
+        waitForVisibilityOfElement(wait, transactionPartiesTab);
         clickButton(transactionPartiesTab);
-//        actionWithWebElements.waitForVisibilityOfElement(wait, addButton);
-
-        String str = "//table[@id='device_list']//tbody//tr";
         List<WebElement> rows = webDriver.findElements(table);
-        int countBefore = rows.size();
+        return rows.size();
+    }
 
+    public void addRecordToTable(){
         clickButton(addButton);
-        customerNameField.sendKeys("Viktor");
-        customerAddressField.sendKeys("Kiev");
-        customerPhoneField.sendKeys("0502501256");
-        isPrivatePersonCheckbox.click();
-//        createButton.click();
+        fillField(customerNameField,"Viktor");
+        fillField(customerAddressField,"Kiev");
+        fillField(customerPhoneField,"0502501256");
+        clickButton(privatePersonCheckbox);
+    }
 
-        try {
-            new Thread().sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public int countTableRawsAfter(){
+        List<WebElement> rows = webDriver.findElements(table);
+//        createButton.click();
+        return rows.size();
     }
 }
-
