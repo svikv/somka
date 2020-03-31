@@ -61,16 +61,16 @@ public class TransactionPartiesPage {
     }
 
     public void deleteTableRecord(int index){
-        clickButton(getRaw(index));
+        clickButton(getEditIcon(index));
         clickButton(deleteButton);
     }
 
-    private By getRaw(int index){
+    private By getEditIcon(int index){
         return By.xpath("//tr[" + index + "]//td[4]");
     }
 
     public void updateTableRecord(int index, String name, String address, String phone){
-        clickButton(getRaw(index));
+        clickButton(getEditIcon(index));
         fillField(customerNameField, name);
         fillField(customerAddressField, address);
         fillField(customerPhoneField, phone);
