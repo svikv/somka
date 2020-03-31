@@ -49,7 +49,7 @@ public class TransactionPartiesPage {
         actionWithWebElements.waitForVisibilityOfElement(wait, transactionPartiesTab);
     }
 
-    public void goToTable(){
+    public void tableView(){
         clickButton(dictionaryTab);
         waitForVisibilityOfElement(wait, transactionPartiesTab);
         clickButton(transactionPartiesTab);
@@ -77,7 +77,7 @@ public class TransactionPartiesPage {
         clickButton(saveButton);
     }
 
-    public String getRecord (int index){
+    public String getTableRecord (int index){
         List<WebElement> rows = webDriver.findElements(table);
         return rows.get(index).getText();
     }

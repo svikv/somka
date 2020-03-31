@@ -14,7 +14,6 @@ import pages.TransactionPartiesPage;
 public class TransactionPartiesPageTest {
 
     private WebDriver webDriver = driverInit();
-    private By userMenuName = By.xpath(".//div[@class='pull-left info']");
     private String login = "Student";
     private String password = "909090";
     private String name = "Viktor";
@@ -31,9 +30,9 @@ public class TransactionPartiesPageTest {
     @Test
     public void addRecord() {
         loginPage.loginToPage(login, password);
-        Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
+        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
-        transactionParties.goToTable();
+        transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfter = transactionParties.countTableRaws();
@@ -43,9 +42,9 @@ public class TransactionPartiesPageTest {
     @Test
     public void deleteRecord() {
         loginPage.loginToPage(login, password);
-        Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
+        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
-        transactionParties.goToTable();
+        transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfterAdding = transactionParties.countTableRaws();
@@ -59,9 +58,9 @@ public class TransactionPartiesPageTest {
     @Test
     public void updateRecord() {
         loginPage.loginToPage(login, password);
-        Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
+        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
-        transactionParties.goToTable();
+        transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfterAdding = transactionParties.countTableRaws();
@@ -72,7 +71,7 @@ public class TransactionPartiesPageTest {
         String newPhone = "0505001020";
 
         transactionParties.updateTableRecord(rawsAfterAdding, newName, newAddress, newPhone);
-        String record = transactionParties.getRecord(rawsAfterAdding - 1);
+        String record = transactionParties.getTableRecord(rawsAfterAdding - 1);
         Assert.assertTrue("Table record wasn't updated",
                 record.contains(newName) && record.contains(newAddress) && record.contains(newPhone));
     }

@@ -2,6 +2,7 @@ package pages;
 
 import libs.ActionWithWebElements;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,9 @@ public class LoginPage {
     @FindBy(xpath = ".//button[@type='submit']")
     private WebElement submitButton;
 
+    @FindBy(xpath = ".//div[@class='pull-left info']")
+    private WebElement userMenuName;
+
     public LoginPage(WebDriver webDriver){
         this.webDriver = webDriver;
         actionWithWebElements = new ActionWithWebElements(webDriver);
@@ -33,5 +37,9 @@ public class LoginPage {
         userNameField.sendKeys(login);
         userNamePassword.sendKeys(password);
         submitButton.click();
+    }
+
+    public boolean isUserMenuNameDisplayed(){
+        return userMenuName.isDisplayed();
     }
 }
