@@ -37,7 +37,7 @@ public class TransactionPartiesPageTest {
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfter = transactionParties.countTableRaws();
-        Assert.assertEquals("New record wasn't added to table", rawsBefore + 1, rawsAfter);
+        Assert.assertEquals("Record wasn't added to table", rawsBefore + 1, rawsAfter);
     }
 
     @Test
@@ -65,11 +65,16 @@ public class TransactionPartiesPageTest {
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfterAdding = transactionParties.countTableRaws();
-        Assert.assertEquals("New record wasn't added to table", rawsBefore + 1, rawsAfterAdding);
+        Assert.assertEquals("Record wasn't added to table", rawsBefore + 1, rawsAfterAdding);
 
-        transactionParties.updateTableRecord(rawsAfterAdding, "Viktoria", "Minsk", "0505001020");
+        String newName = "Oleg";
+        String newAddress = "Minsk";
+        String newPhone = "0505001020";
+
+        transactionParties.updateTableRecord(rawsAfterAdding, newName, newAddress, newPhone);
         String record = transactionParties.getRecord(rawsAfterAdding - 1);
-        Assert.assertTrue(record.contains(name));
+        Assert.assertTrue("Table record wasn't updated",
+                record.contains(newName) && record.contains(newAddress) && record.contains(newPhone));
     }
 
     @After
