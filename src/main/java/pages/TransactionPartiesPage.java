@@ -13,8 +13,8 @@ import java.util.List;
 
 public class TransactionPartiesPage {
 
-    protected WebDriver webDriver;
-    Wait<WebDriver> wait;
+    private WebDriver webDriver;
+    private Wait<WebDriver> wait;
     private Logger logger = Logger.getLogger(getClass());
     private ActionWithWebElements actionWithWebElements;
 
@@ -37,15 +37,15 @@ public class TransactionPartiesPage {
         wait = new WebDriverWait(webDriver, 1);
     }
 
-    public void clickButton(By element){
+    private void clickButton(By element){
         actionWithWebElements.clickButton(element);
     }
 
-    public void fillField(By element, String text){
+    private void fillField(By element, String text){
         actionWithWebElements.fillField(element,text);
     }
 
-    public void waitForVisibilityOfElement(Wait<WebDriver> wait, By transactionPartiesTab){
+    private void waitForVisibilityOfElement(Wait<WebDriver> wait, By transactionPartiesTab){
         actionWithWebElements.waitForVisibilityOfElement(wait, transactionPartiesTab);
     }
 
@@ -61,31 +61,32 @@ public class TransactionPartiesPage {
     }
 
     public void deleteTableRecord(int index){
-        By raw = By.xpath("//tr[" + index + "]//td[4]");
-        clickButton(raw);
+        clickButton(getRaw(index));
         clickButton(deleteButton);
     }
 
+    private By getRaw(int index){
+        return By.xpath("//tr[" + index + "]//td[4]");
+    }
+
     public void updateTableRecord(int index, String name, String address, String phone){
-        By raw = By.xpath("//tr[" + index + "]//td[4]");
-        clickButton(raw);
+        clickButton(getRaw(index));
         fillField(customerNameField, name);
-        fillField(customerAddressField,address);
-        fillField(customerPhoneField,phone);
+        fillField(customerAddressField, address);
+        fillField(customerPhoneField, phone);
         clickButton(saveButton);
     }
 
     public String getRecord (int index){
         List<WebElement> rows = webDriver.findElements(table);
-        String record = rows.get(index).getText();
-        return record;
+        return rows.get(index).getText();
     }
 
     public void addTableRecord(String name, String address, String phone){
         clickButton(addButton);
-        fillField(customerNameField,name);
-        fillField(customerAddressField,address);
-        fillField(customerPhoneField,phone);
+        fillField(customerNameField, name);
+        fillField(customerAddressField, address);
+        fillField(customerPhoneField, phone);
         clickButton(privatePersonCheckbox);
         clickButton(createButton);
     }
