@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,8 +25,10 @@ public class TransactionPartiesPage {
     private By customerAddressField = By.id("prov_cus_proCustAddress");
     private By customerPhoneField = By.id("prov_cus_proCustPhone");
     private By privatePersonCheckbox = By.id("prov_cus_proCustIsFl");
-    private By createButton = By.id("add");
+    private By createButton = By.name("add");
     private By table = By.xpath("//table[@id='device_list']//tbody//tr");
+    private By deleteButton = By.name("delete");
+    private By saveButton = By.name("save");
 
     public TransactionPartiesPage(WebDriver webDriver){
         this.webDriver = webDriver;
@@ -48,25 +49,44 @@ public class TransactionPartiesPage {
         actionWithWebElements.waitForVisibilityOfElement(wait, transactionPartiesTab);
     }
 
-    public int countTableRawsBefore(){
+    public void goToTable(){
         clickButton(dictionaryTab);
         waitForVisibilityOfElement(wait, transactionPartiesTab);
         clickButton(transactionPartiesTab);
+    }
+
+    public int countTableRaws(){
         List<WebElement> rows = webDriver.findElements(table);
         return rows.size();
     }
 
-    public void addRecordToTable(){
+    public void deleteTableRecord(int index){
+        By raw = By.xpath("//tr[" + index + "]//td[4]");
+        clickButton(raw);
+        clickButton(deleteButton);
+    }
+
+    public void updateTableRecord(int index, String name, String address, String phone){
+        By raw = By.xpath("//tr[" + index + "]//td[4]");
+        clickButton(raw);
+        fillField(customerNameField, name);
+        fillField(customerAddressField,address);
+        fillField(customerPhoneField,phone);
+        clickButton(saveButton);
+    }
+
+    public String getRecord (int index){
+        List<WebElement> rows = webDriver.findElements(table);
+        String record = rows.get(index).getText();
+        return record;
+    }
+
+    public void addTableRecord(String name, String address, String phone){
         clickButton(addButton);
-        fillField(customerNameField,"Viktor");
-        fillField(customerAddressField,"Kiev");
-        fillField(customerPhoneField,"0502501256");
+        fillField(customerNameField,name);
+        fillField(customerAddressField,address);
+        fillField(customerPhoneField,phone);
         clickButton(privatePersonCheckbox);
-    }
-
-    public int countTableRawsAfter(){
-        List<WebElement> rows = webDriver.findElements(table);
-//        createButton.click();
-        return rows.size();
+        clickButton(createButton);
     }
 }

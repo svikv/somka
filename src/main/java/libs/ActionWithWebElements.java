@@ -76,7 +76,7 @@ public class ActionWithWebElements {
 
     private void selectValueFromSelector (By element, String text) {
         Select dropDownValue = new Select(webDriver.findElement(element));
-        try{
+        try {
             dropDownValue.selectByVisibleText(text);
         } catch(Exception e){
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class ActionWithWebElements {
 
     private void selectValueFromSelector (By element, int index) {
         Select dropDownValue = new Select(webDriver.findElement(element));
-        try{
+        try {
             dropDownValue.selectByIndex(index);
         } catch(Exception e){
             e.printStackTrace();
