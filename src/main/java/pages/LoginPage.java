@@ -9,7 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 
-    protected WebDriver webDriver;
+    private WebDriver webDriver;
+    private String login = "Student";
+    private String password = "909090";
     protected Logger logger = Logger.getLogger(getClass());
     protected ActionWithWebElements actionWithWebElements;
     private final static String  URL = "http://v3.test.itpmgroup.com";
@@ -32,7 +34,7 @@ public class LoginPage {
         PageFactory.initElements(this.webDriver, this);
     }
 
-    public void loginToPage(String login, String password){
+    public void loginToPage(){
         webDriver.get(URL);
         userNameField.sendKeys(login);
         userNamePassword.sendKeys(password);

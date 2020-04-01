@@ -13,8 +13,6 @@ import pages.TransactionPartiesPage;
 public class TransactionPartiesPageTest {
 
     private WebDriver webDriver = driverInit();
-    private String login = "Student";
-    private String password = "909090";
     private String name = "Viktor";
     private String address = "Kiev";
     private String phone = "0502501256";
@@ -28,19 +26,23 @@ public class TransactionPartiesPageTest {
 
     @Test
     public void addRecord() {
-        loginPage.loginToPage(login, password);
+        loginPage.loginToPage();
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRaws();
         transactionParties.addTableRecord(name, address, phone);
         int rawsAfter = transactionParties.countTableRaws();
-        Assert.assertEquals("Record wasn't added to table", rawsBefore + 1, rawsAfter);
+        Assert.assertEquals(rawsBefore + 1, rawsAfter);
+
+        String actualRecord = transactionParties.getTableRecord(rawsAfter - 1);
+        String expectedRecord = name + " " + address + " " + phone;
+        Assert.assertTrue("Table record wasn't updated", actualRecord.contains(expectedRecord));
     }
 
     @Test
     public void deleteRecord() {
-        loginPage.loginToPage(login, password);
+        loginPage.loginToPage();
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
@@ -56,7 +58,7 @@ public class TransactionPartiesPageTest {
 
     @Test
     public void updateRecord() {
-        loginPage.loginToPage(login, password);
+        loginPage.loginToPage();
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
@@ -70,9 +72,9 @@ public class TransactionPartiesPageTest {
         String newPhone = "0505001020";
 
         transactionParties.updateTableRecord(rawsAfterAdding, newName, newAddress, newPhone);
-        String record = transactionParties.getTableRecord(rawsAfterAdding - 1);
-        Assert.assertTrue("Table record wasn't updated",
-                record.contains(newName) && record.contains(newAddress) && record.contains(newPhone));
+        String actualRecord = transactionParties.getTableRecord(rawsAfterAdding - 1);
+        String expectedRecord = newName + " " + newAddress + " " + newPhone;
+        Assert.assertTrue("Table record wasn't updated", actualRecord.contains(expectedRecord));
     }
 
     @After

@@ -13,8 +13,6 @@ import pages.LoginPage;
 public class LoginPageTest {
 
     private WebDriver webDriver = driverInit();
-    private String login = "Student";
-    private String password = "909090";
     By userMenuName = By.xpath(".//div[@class='pull-left info']");
 
     private WebDriver driverInit() {
@@ -26,7 +24,7 @@ public class LoginPageTest {
 
     @Test
     public void loginToPage() {
-        loginPage.loginToPage(login, password);
+        loginPage.loginToPage();
         Assert.assertTrue(webDriver.findElement(userMenuName).isDisplayed());
     }
 
