@@ -55,9 +55,9 @@ public class TransactionsPage {
         actionWithWebElements.selectValueFromSelector(dateSelector, date);
         actionWithWebElements.selectValueFromSelector(monthSelector, month);
         actionWithWebElements.selectValueFromSelector(yearSelector, year);
-        actionWithWebElements.selectValueFromSelector(typeSelector,type);
-        actionWithWebElements.selectValueFromSelector(buyerSelector,buyer);
-        actionWithWebElements.selectValueFromSelector(supplierSelector,supplier);
+        actionWithWebElements.selectValueFromSelector(typeSelector, type);
+        actionWithWebElements.selectValueFromSelector(buyerSelector, buyer);
+        actionWithWebElements.selectValueFromSelector(supplierSelector, supplier);
         clickButton(createButton);
     }
 
@@ -65,5 +65,15 @@ public class TransactionsPage {
         List<WebElement> rows = webDriver.findElements(table);
         return rows.get(index).getText();
     }
-}
 
+    private By getRaw(int index){
+        return By.xpath("//tr[" + index + "]");
+    }
+
+    public void updateTableRecord(int index, String newBuyer, String newSupplier){
+        clickButton(getRaw(index));
+        actionWithWebElements.selectValueFromSelector(buyerSelector, newBuyer);
+        actionWithWebElements.selectValueFromSelector(supplierSelector, newSupplier);
+        clickButton(saveButton);
+    }
+}

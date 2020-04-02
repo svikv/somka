@@ -43,6 +43,30 @@ public class TransactionsPageTest {
         Assert.assertTrue("Record wasn't added to table", actualRecord.contains(expectedRecord));
     }
 
+    @Test
+    public void updateRecord() {
+        loginPage.loginToPage();
+        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
+
+        transactions.tableView();
+        int rawsBefore = transactions.countTableRaws();
+        transactions.addTableRecord(date, month, year, type, buyer, supplier);
+        int rawsAfter = transactions.countTableRaws();
+        Assert.assertEquals(rawsBefore + 1, rawsAfter);
+
+        String actualRecord = transactions.getTableRecord(rawsAfter - 1);
+        String expectedRecord = type + " " + buyer + " " + supplier;
+        Assert.assertTrue("Record wasn't added to table", actualRecord.contains(expectedRecord));
+
+        String newBuyer = "QATestLab";
+        String newSupplier = "Sergey";
+
+        transactions.updateTableRecord(rawsAfter, newBuyer, newSupplier);
+        actualRecord = transactions.getTableRecord(rawsAfter - 1);
+        expectedRecord = newBuyer + " " + newSupplier;
+        Assert.assertTrue("Table record wasn't updated", actualRecord.contains(expectedRecord));
+    }
+
     @After
     public void tearDown(){
         webDriver.quit();
