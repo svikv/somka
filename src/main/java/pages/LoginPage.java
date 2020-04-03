@@ -7,20 +7,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-public class LoginPage {
+public class LoginPage extends Page {
 
-    private WebDriver webDriver;
-    private String login = "Student";
-    private String password = "909090";
+    private String user = Page.getAuthUser().get("authUser");
+    private String password = Page.getAuthUser().get("authPass");
     protected Logger logger = Logger.getLogger(getClass());
     protected ActionWithWebElements actionWithWebElements;
-    private final static String  URL = "http://v3.test.itpmgroup.com";
 
     @FindBy(name = "_username")
     private WebElement userNameField;
 
     @FindBy(name = "_password")
-    private WebElement userNamePassword;
+    private WebElement userPasswordField;
 
     @FindBy(xpath = ".//button[@type='submit']")
     private WebElement submitButton;
@@ -29,15 +27,14 @@ public class LoginPage {
     private WebElement userMenuName;
 
     public LoginPage(WebDriver webDriver){
-        this.webDriver = webDriver;
-        actionWithWebElements = new ActionWithWebElements(webDriver);
+        super(webDriver);
         PageFactory.initElements(this.webDriver, this);
     }
 
     public void loginToPage(){
-        webDriver.get(URL);
-        userNameField.sendKeys(login);
-        userNamePassword.sendKeys(password);
+        webDriver.navigate().to(Page.getPageUrl());
+        userNameField.sendKeys(user);
+        userPasswordField.sendKeys(password);
         submitButton.click();
     }
 

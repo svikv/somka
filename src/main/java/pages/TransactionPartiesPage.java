@@ -1,6 +1,5 @@
 package pages;
 
-import libs.ActionWithWebElements;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,12 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class TransactionPartiesPage {
+public class TransactionPartiesPage extends Page {
 
-    private WebDriver webDriver;
     private Wait<WebDriver> wait;
     private Logger logger = Logger.getLogger(getClass());
-    private ActionWithWebElements actionWithWebElements;
 
     private By dictionaryTab = By.xpath("//i[@class='fa fa-book']");
     private By transactionPartiesTab = By.id("prov_cus");
@@ -26,27 +23,15 @@ public class TransactionPartiesPage {
     private By customerPhoneField = By.id("prov_cus_proCustPhone");
     private By privatePersonCheckbox = By.id("prov_cus_proCustIsFl");
     private By createButton = By.name("add");
-    private By table = By.xpath("//table[@id='device_list']//tbody//tr");
+//    private By table = By.xpath("//table[@id='device_list']//tbody//tr");
+    private By table  = By.tagName("tr");
     private By deleteButton = By.name("delete");
     private By saveButton = By.name("save");
 
     public TransactionPartiesPage(WebDriver webDriver){
-        this.webDriver = webDriver;
-        actionWithWebElements = new ActionWithWebElements(webDriver);
+        super(webDriver);
         PageFactory.initElements(this.webDriver, this);
         wait = new WebDriverWait(webDriver, 1);
-    }
-
-    private void clickButton(By element){
-        actionWithWebElements.clickButton(element);
-    }
-
-    private void fillField(By element, String text){
-        actionWithWebElements.fillField(element,text);
-    }
-
-    private void waitForVisibilityOfElement(Wait<WebDriver> wait, By transactionPartiesTab){
-        actionWithWebElements.waitForVisibilityOfElement(wait, transactionPartiesTab);
     }
 
     public void tableView(){
@@ -55,7 +40,7 @@ public class TransactionPartiesPage {
         clickButton(transactionPartiesTab);
     }
 
-    public int countTableRaws(){
+    public int countTableRows(){
         List<WebElement> rows = webDriver.findElements(table);
         return rows.size();
     }
@@ -66,7 +51,7 @@ public class TransactionPartiesPage {
     }
 
     private By getEditIcon(int index){
-        return By.xpath("//tr[" + index + "]//td[4]");
+        return By.xpath("//tr[" + (index-1) + "]//td[4]");
     }
 
     public void updateTableRecord(int index, String name, String address, String phone){

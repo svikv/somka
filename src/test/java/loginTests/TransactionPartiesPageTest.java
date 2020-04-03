@@ -30,9 +30,9 @@ public class TransactionPartiesPageTest {
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
-        int rawsBefore = transactionParties.countTableRaws();
+        int rawsBefore = transactionParties.countTableRows();
         transactionParties.addTableRecord(name, address, phone);
-        int rawsAfter = transactionParties.countTableRaws();
+        int rawsAfter = transactionParties.countTableRows();
         Assert.assertEquals(rawsBefore + 1, rawsAfter);
 
         String actualRecord = transactionParties.getTableRecord(rawsAfter - 1);
@@ -46,13 +46,13 @@ public class TransactionPartiesPageTest {
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
-        int rawsBefore = transactionParties.countTableRaws();
+        int rawsBefore = transactionParties.countTableRows();
         transactionParties.addTableRecord(name, address, phone);
-        int rawsAfterAdding = transactionParties.countTableRaws();
+        int rawsAfterAdding = transactionParties.countTableRows();
         Assert.assertEquals("Record wasn't added to table", rawsBefore + 1, rawsAfterAdding);
 
         transactionParties.deleteTableRecord(rawsAfterAdding);
-        int rawsAfterDeleting = transactionParties.countTableRaws();
+        int rawsAfterDeleting = transactionParties.countTableRows();
         Assert.assertEquals("Record wasn't deleted from table", rawsAfterAdding - 1, rawsAfterDeleting);
     }
 
@@ -62,9 +62,9 @@ public class TransactionPartiesPageTest {
         Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
 
         transactionParties.tableView();
-        int rawsBefore = transactionParties.countTableRaws();
+        int rawsBefore = transactionParties.countTableRows();
         transactionParties.addTableRecord(name, address, phone);
-        int rawsAfterAdding = transactionParties.countTableRaws();
+        int rawsAfterAdding = transactionParties.countTableRows();
         Assert.assertEquals("Record wasn't added to table", rawsBefore + 1, rawsAfterAdding);
 
         String newName = "Oleg";
