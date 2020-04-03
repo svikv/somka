@@ -1,6 +1,5 @@
 package pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +12,6 @@ import java.util.List;
 public class TransactionsPage extends Page {
 
     private Wait<WebDriver> wait;
-    private Logger logger = Logger.getLogger(getClass());
-
     private By transactionsTab = By.id("deal");
     private By addButton = By.xpath("//div[@class='box-tools']");
     private By dateSelector = By.id("deal_dealDate_date_day");

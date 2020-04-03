@@ -1,6 +1,5 @@
 package pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +12,6 @@ import java.util.List;
 public class TransactionPartiesPage extends Page {
 
     private Wait<WebDriver> wait;
-    private Logger logger = Logger.getLogger(getClass());
-
     private By dictionaryTab = By.xpath("//i[@class='fa fa-book']");
     private By transactionPartiesTab = By.id("prov_cus");
     private By addButton = By.xpath("//div[@class='box-tools']");

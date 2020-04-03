@@ -8,18 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 
 public class Page {
 
     WebDriver webDriver;
-    private Logger logger = LoggerFactory.getLogger(Page.class);
+    protected static final Logger LOG = Logger.getLogger(Page.class);
     private static JSONObject credentials = JsonReader.getJsonObject("credentials.json");
     private final static String  URL = "http://v3.test.itpmgroup.com";
-
     private static String authUser = (String) credentials.get("AUTH_USER");
     private static String authPass = (String) credentials.get("AUTH_PASSWORD");
 
@@ -42,20 +41,20 @@ public class Page {
         try {
             webDriver.findElement(element).clear();
             webDriver.findElement(element).sendKeys(text);
-            logger.info("");
+            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 
     public void clickButton(By element){
         try {
             webDriver.findElement(element).click();
-            logger.info("");
+            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 
@@ -64,7 +63,7 @@ public class Page {
             return webDriver.findElement(element).isDisplayed();
         } catch (Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
             return false;
         }
     }
@@ -78,7 +77,7 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 
@@ -91,7 +90,7 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 
@@ -101,7 +100,7 @@ public class Page {
             dropDownValue.selectByVisibleText(text);
         } catch(Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 
@@ -111,7 +110,7 @@ public class Page {
             dropDownValue.selectByIndex(index);
         } catch(Exception e){
             e.printStackTrace();
-            logger.error("");
+            LOG.error("");
         }
     }
 

@@ -12,7 +12,6 @@ public class LoginPage extends Page {
     private String user = Page.getAuthUser().get("authUser");
     private String password = Page.getAuthUser().get("authPass");
     protected Logger logger = Logger.getLogger(getClass());
-    protected ActionWithWebElements actionWithWebElements;
 
     @FindBy(name = "_username")
     private WebElement userNameField;
