@@ -1,18 +1,13 @@
 package loginTests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.LoginPage;
-import pages.TransactionsPage;
 
-public class TransactionsPageTest {
+import parentTests.AbstractParentTest;
 
-    private WebDriver webDriver = driverInit();
+public class TransactionsPageTest extends AbstractParentTest {
+
     private String date = "05";
     private String month = "марта";
     private String year = "2020";
@@ -20,22 +15,16 @@ public class TransactionsPageTest {
     private String buyer = "Sergey";
     private String supplier = "EuroTruckService";
 
-    private WebDriver driverInit() {
-        WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
-    }
-    private LoginPage loginPage = new LoginPage(webDriver);
-    private TransactionsPage transactions = new TransactionsPage(webDriver);
-
+    @Ignore
     @Test
     public void addRecord() {
-        loginPage.loginToPage();
-        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
+        loginPage.loginToPage(user, password);
+        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
 
         transactions.tableView();
-        int rawsBefore = transactions.countTableRaws();
+        int rawsBefore = transactions.countTableRows();
         transactions.addTableRecord(date, month, year, type, buyer, supplier);
-        int rawsAfter = transactions.countTableRaws();
+        int rawsAfter = transactions.countTableRows();
         Assert.assertEquals(rawsBefore + 1, rawsAfter);
 
         String actualRecord = transactions.getTableRecord(rawsAfter - 1);
@@ -45,13 +34,13 @@ public class TransactionsPageTest {
 
     @Test
     public void updateRecord() {
-        loginPage.loginToPage();
-        Assert.assertTrue(loginPage.isUserMenuNameDisplayed());
+        loginPage.loginToPage(user, password);
+        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
 
         transactions.tableView();
-        int rawsBefore = transactions.countTableRaws();
+        int rawsBefore = transactions.countTableRows();
         transactions.addTableRecord(date, month, year, type, buyer, supplier);
-        int rawsAfter = transactions.countTableRaws();
+        int rawsAfter = transactions.countTableRows();
         Assert.assertEquals(rawsBefore + 1, rawsAfter);
 
         String actualRecord = transactions.getTableRecord(rawsAfter - 1);
@@ -65,10 +54,5 @@ public class TransactionsPageTest {
         actualRecord = transactions.getTableRecord(rawsAfter - 1);
         expectedRecord = newBuyer + " " + newSupplier;
         Assert.assertTrue("Table record wasn't updated", actualRecord.contains(expectedRecord));
-    }
-
-    @After
-    public void tearDown(){
-        webDriver.quit();
     }
 }

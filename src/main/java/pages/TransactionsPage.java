@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,32 +12,49 @@ import java.util.List;
 
 public class TransactionsPage extends Page {
 
-    private Wait<WebDriver> wait;
-    private By transactionsTab = By.id("deal");
-    private By addButton = By.xpath("//div[@class='box-tools']");
-    private By dateSelector = By.id("deal_dealDate_date_day");
-    private By monthSelector = By.id("deal_dealDate_date_month");
-    private By yearSelector = By.id("deal_dealDate_date_year");
-    private By typeSelector = By.id("deal_dealType");
-    private By buyerSelector = By.id("deal_customer");
-    private By supplierSelector = By.id("deal_provider");
-    private By createButton = By.name("add");
-//    private By table = By.xpath("//table[@id='device_list']//tbody//tr");
-    private By table  = By.tagName("tr");
-    private By saveButton = By.name("save");
+    @FindBy(id = "deal")
+    private WebElement transactionsTab;
+
+    @FindBy(xpath = "//div[@class='box-tools']")
+    private WebElement addButton;
+
+    @FindBy(id = "deal_dealDate_date_day")
+    private WebElement dateSelector;
+
+    @FindBy(id = "deal_dealDate_date_month")
+    private WebElement monthSelector;
+
+    @FindBy(id = "deal_dealDate_date_year")
+    private WebElement yearSelector;
+
+    @FindBy(id = "deal_dealType")
+    private WebElement typeSelector;
+
+    @FindBy(id = "deal_customer")
+    private WebElement buyerSelector;
+
+    @FindBy(id = "deal_provider")
+    private WebElement supplierSelector;
+
+    @FindBy(name = "add")
+    private WebElement createButton;
+
+    @FindBy(name = "save")
+    private WebElement saveButton;
+
+    @FindBy(xpath = "//table[@id='device_list']//tbody")
+    private WebElement table;
 
     public TransactionsPage(WebDriver webDriver){
         super(webDriver);
-        PageFactory.initElements(this.webDriver, this);
-        wait = new WebDriverWait(webDriver, 1);
     }
 
     public void tableView(){
         clickButton(transactionsTab);
     }
 
-    public int countTableRaws(){
-        List<WebElement> rows = webDriver.findElements(table);
+    public int countTableRows(){
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
         return rows.size();
     }
 
@@ -52,7 +70,7 @@ public class TransactionsPage extends Page {
     }
 
     public String getTableRecord (int index){
-        List<WebElement> rows = webDriver.findElements(table);
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
         return rows.get(index).getText();
     }
 
@@ -66,4 +84,5 @@ public class TransactionsPage extends Page {
         selectValueFromSelector(supplierSelector, newSupplier);
         clickButton(saveButton);
     }
+
 }

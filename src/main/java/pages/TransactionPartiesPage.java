@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,34 +12,50 @@ import java.util.List;
 
 public class TransactionPartiesPage extends Page {
 
-    private Wait<WebDriver> wait;
-    private By dictionaryTab = By.xpath("//i[@class='fa fa-book']");
-    private By transactionPartiesTab = By.id("prov_cus");
-    private By addButton = By.xpath("//div[@class='box-tools']");
-    private By customerNameField = By.id("prov_cus_proCustName");
-    private By customerAddressField = By.id("prov_cus_proCustAddress");
-    private By customerPhoneField = By.id("prov_cus_proCustPhone");
-    private By privatePersonCheckbox = By.id("prov_cus_proCustIsFl");
-    private By createButton = By.name("add");
-//    private By table = By.xpath("//table[@id='device_list']//tbody//tr");
-    private By table  = By.tagName("tr");
-    private By deleteButton = By.name("delete");
-    private By saveButton = By.name("save");
+    @FindBy(xpath = "//i[@class='fa fa-book']")
+    private WebElement dictionaryTab;
+
+    @FindBy(id = "prov_cus")
+    private WebElement transactionPartiesTab;
+
+    @FindBy(xpath = "//div[@class='box-tools']")
+    private WebElement addButton;
+
+    @FindBy(id = "prov_cus_proCustName")
+    private WebElement customerNameField;
+
+    @FindBy(id = "prov_cus_proCustAddress")
+    private WebElement customerAddressField;
+
+    @FindBy(id = "prov_cus_proCustPhone")
+    private WebElement customerPhoneField;
+
+    @FindBy(id = "prov_cus_proCustIsFl")
+    private WebElement privatePersonCheckbox;
+
+    @FindBy(name = "add")
+    private WebElement createButton;
+
+    @FindBy(xpath = "//table[@id='device_list']//tbody")
+    private WebElement table;
+
+    @FindBy(name = "delete")
+    private WebElement deleteButton;
+
+    @FindBy(name = "save")
+    private WebElement saveButton;
 
     public TransactionPartiesPage(WebDriver webDriver){
         super(webDriver);
-        PageFactory.initElements(this.webDriver, this);
-        wait = new WebDriverWait(webDriver, 1);
     }
 
     public void tableView(){
         clickButton(dictionaryTab);
-        waitForVisibilityOfElement(wait, transactionPartiesTab);
         clickButton(transactionPartiesTab);
     }
 
     public int countTableRows(){
-        List<WebElement> rows = webDriver.findElements(table);
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
         return rows.size();
     }
 
@@ -60,7 +77,7 @@ public class TransactionPartiesPage extends Page {
     }
 
     public String getTableRecord (int index){
-        List<WebElement> rows = webDriver.findElements(table);
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
         return rows.get(index).getText();
     }
 
