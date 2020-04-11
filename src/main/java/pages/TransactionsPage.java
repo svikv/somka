@@ -65,7 +65,7 @@ public class TransactionsPage extends Page {
         selectValueFromSelector(supplierSelector, supplier);
         clickButton(createButton);
         LOG.info("Record with date: " + date + ", month: " + month + ", year: " + year + ", type: "
-                + type + ", buyer: " + buyer + " and supplier: " + supplier + " was saved in table");
+                + type + ", buyer: " + buyer + " and supplier: " + supplier + " was added to Transactions table");
     }
 
         public String getTableRecord (int index){
@@ -82,7 +82,7 @@ public class TransactionsPage extends Page {
         selectValueFromSelector(buyerSelector, newBuyer);
         selectValueFromSelector(supplierSelector, newSupplier);
         clickButton(saveButton);
-        LOG.info("Record was updated");
+        LOG.info("Record was updated in Transactions table");
     }
 
 }

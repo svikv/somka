@@ -59,7 +59,7 @@ public class TransactionPartiesPage extends Page {
     public void deleteTableRecord(int index){
         clickButton(getEditIcon(index));
         clickButton(deleteButton);
-        LOG.info("Record was deleted");
+        LOG.info("Record was deleted form TransactionParties table");
     }
 
     private By getEditIcon(int index){
@@ -72,7 +72,7 @@ public class TransactionPartiesPage extends Page {
         fillField(customerAddressField, address);
         fillField(customerPhoneField, phone);
         clickButton(saveButton);
-        LOG.info("Record was updated");
+        LOG.info("Record was updated in TransactionParties table");
     }
 
     public String getTableRecord (int index){
@@ -87,6 +87,6 @@ public class TransactionPartiesPage extends Page {
         fillField(customerPhoneField, phone);
         clickButton(privatePersonCheckbox);
         clickButton(createButton);
-        LOG.info("Record with name: " + name + ", address: " + address + " and phone: " + phone + " was saved in table");
+        LOG.info("Record with name: " + name + ", address: " + address + " and phone: " + phone + " was added to TransactionParties table");
     }
 }
