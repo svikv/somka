@@ -3,7 +3,6 @@ package loginTests;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import parentTests.AbstractParentTest;
 
 public class TransactionPartiesPageTest extends AbstractParentTest {
@@ -28,6 +27,7 @@ public class TransactionPartiesPageTest extends AbstractParentTest {
         Assert.assertTrue("Table record wasn't updated", actualRecord.contains(expectedRecord));
     }
 
+    @Ignore
     @Test
     public void deleteRecord() {
         loginPage.loginToPage(user, password);
@@ -44,6 +44,7 @@ public class TransactionPartiesPageTest extends AbstractParentTest {
         Assert.assertEquals("Record wasn't deleted from table", rawsAfterAdding - 1, rawsAfterDeleting);
     }
 
+    @Ignore
     @Test
     public void updateRecord() {
         loginPage.loginToPage(user, password);

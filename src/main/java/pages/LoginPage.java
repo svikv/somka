@@ -26,6 +26,7 @@ public class LoginPage extends Page {
         inputLoginName.sendKeys(user);
         inputPasswordName.sendKeys(password);
         submitButton.click();
+        LOG.info("User " + "with login: --" + Page.getAuthUser().get("authUser") + "-- logged in!");
     }
 
     public boolean isLoginBoxDisplayed () {

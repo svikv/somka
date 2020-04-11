@@ -1,9 +1,7 @@
 package loginTests;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
 import parentTests.AbstractParentTest;
 
 public class TransactionsPageTest extends AbstractParentTest {
@@ -15,7 +13,6 @@ public class TransactionsPageTest extends AbstractParentTest {
     private String buyer = "Sergey";
     private String supplier = "EuroTruckService";
 
-    @Ignore
     @Test
     public void addRecord() {
         loginPage.loginToPage(user, password);

@@ -1,6 +1,7 @@
 package pages;
 
 import libs.JsonReader;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,17 +10,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.LoggerFactory;
 
 public class Page {
 
     WebDriver webDriver;
-//    protected Wait<WebDriver> wait;
     protected static final Logger LOG = Logger.getLogger(Page.class);
     private static JSONObject credentials = JsonReader.getJsonObject("credentials.json");
     private static String URL = (String) credentials.get("BASE_URL");
@@ -28,7 +25,6 @@ public class Page {
 
     public Page(WebDriver webDriver) {
         this.webDriver = webDriver;
-//        wait = new WebDriverWait(webDriver, 1);
         PageFactory.initElements(webDriver, this);
     }
 
@@ -47,30 +43,30 @@ public class Page {
         try {
             element.clear();
             element.sendKeys(text);
-            LOG.info("");
+//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 
     public void clickButton(WebElement element){
         try {
             element.click();
-            LOG.info("");
+//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 
     public void clickButton(By element){
         try {
             webDriver.findElement(element).click();
-            LOG.info("");
+//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 
@@ -80,7 +76,7 @@ public class Page {
             return element.isDisplayed();
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
             return false;
         }
     }
@@ -93,7 +89,7 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 
@@ -105,7 +101,7 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 
@@ -115,7 +111,7 @@ public class Page {
             dropDownValue.selectByVisibleText(text);
         } catch(Exception e){
             e.printStackTrace();
-            LOG.error("");
+//            LOG.error("");
         }
     }
 

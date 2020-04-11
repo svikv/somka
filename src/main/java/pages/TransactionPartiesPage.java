@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -62,6 +59,7 @@ public class TransactionPartiesPage extends Page {
     public void deleteTableRecord(int index){
         clickButton(getEditIcon(index));
         clickButton(deleteButton);
+        LOG.info("Record was deleted");
     }
 
     private By getEditIcon(int index){
@@ -74,6 +72,7 @@ public class TransactionPartiesPage extends Page {
         fillField(customerAddressField, address);
         fillField(customerPhoneField, phone);
         clickButton(saveButton);
+        LOG.info("Record was updated");
     }
 
     public String getTableRecord (int index){
@@ -88,5 +87,6 @@ public class TransactionPartiesPage extends Page {
         fillField(customerPhoneField, phone);
         clickButton(privatePersonCheckbox);
         clickButton(createButton);
+        LOG.info("Record with name: " + name + ", address: " + address + " and phone: " + phone + " was saved in table");
     }
 }

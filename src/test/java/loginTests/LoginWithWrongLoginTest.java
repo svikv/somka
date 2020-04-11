@@ -1,7 +1,6 @@
 package loginTests;
 
 import org.junit.Test;
-import pages.Page;
 import parentTests.AbstractParentTest;
 
 public class LoginWithWrongLoginTest extends AbstractParentTest {

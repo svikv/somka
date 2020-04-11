@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -67,9 +64,11 @@ public class TransactionsPage extends Page {
         selectValueFromSelector(buyerSelector, buyer);
         selectValueFromSelector(supplierSelector, supplier);
         clickButton(createButton);
+        LOG.info("Record with date: " + date + ", month: " + month + ", year: " + year + ", type: "
+                + type + ", buyer: " + buyer + " and supplier: " + supplier + " was saved in table");
     }
 
-    public String getTableRecord (int index){
+        public String getTableRecord (int index){
         List<WebElement> rows = table.findElements(By.tagName("tr"));
         return rows.get(index).getText();
     }
@@ -83,6 +82,7 @@ public class TransactionsPage extends Page {
         selectValueFromSelector(buyerSelector, newBuyer);
         selectValueFromSelector(supplierSelector, newSupplier);
         clickButton(saveButton);
+        LOG.info("Record was updated");
     }
 
 }
