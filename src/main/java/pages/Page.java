@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Page {
 
-    WebDriver webDriver;
+    protected WebDriver webDriver;
     protected static final Logger LOG = Logger.getLogger(Page.class);
     private static JSONObject credentials = JsonReader.getJsonObject("credentials.json");
     private static String URL = (String) credentials.get("BASE_URL");
@@ -43,30 +43,24 @@ public class Page {
         try {
             element.clear();
             element.sendKeys(text);
-//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 
     public void clickButton(WebElement element){
         try {
             element.click();
-//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 
     public void clickButton(By element){
         try {
             webDriver.findElement(element).click();
-//            LOG.info("");
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 
@@ -76,7 +70,6 @@ public class Page {
             return element.isDisplayed();
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
             return false;
         }
     }
@@ -89,7 +82,6 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 
@@ -101,7 +93,6 @@ public class Page {
             }
         } catch (Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 
@@ -111,7 +102,6 @@ public class Page {
             dropDownValue.selectByVisibleText(text);
         } catch(Exception e){
             e.printStackTrace();
-//            LOG.error("");
         }
     }
 

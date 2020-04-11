@@ -21,7 +21,7 @@ public class AbstractParentTest {
     protected TransactionsPage transactions;
     protected String user;
     protected String password;
-    protected Utils utils;
+    private Utils utils;
     private String pathToScreenShot;
 
     @Rule
@@ -37,7 +37,6 @@ public class AbstractParentTest {
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage = new LoginPage(webDriver);
-        homePage = new HomePage(webDriver);
         homePage = new HomePage(webDriver);
         transactionParties = new TransactionPartiesPage(webDriver);
         transactions = new TransactionsPage(webDriver);
@@ -58,7 +57,7 @@ public class AbstractParentTest {
 
     protected  void checkExpectedResult(String message, boolean actualResult) {
 
-        if (!actualResult == true) {
+        if (!actualResult) {
             utils.screenShot(pathToScreenShot, webDriver);
         }
 
