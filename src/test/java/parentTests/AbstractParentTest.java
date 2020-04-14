@@ -1,11 +1,8 @@
 package parentTests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import libs.Utils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
+import utilities.Utils;
+import org.junit.*;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,6 +23,11 @@ public class AbstractParentTest {
 
     @Rule
     public TestName testName = new TestName();
+
+    @BeforeClass
+    public static void setup() {
+        Page.serverHealthCheck();
+    }
 
     @Before
     public  void SetUp() throws Exception {

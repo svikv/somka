@@ -1,6 +1,8 @@
 package pages;
 
-import libs.JsonReader;
+import org.junit.Assert;
+import utilities.HttpCaller;
+import utilities.JsonReader;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
@@ -105,7 +107,21 @@ public class Page {
         }
     }
 
+    public void waitForVisibilityOfWebElement(Wait<WebDriver> wait, WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void waitForVisibilityOfElement(Wait<WebDriver> wait, By locatorType) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locatorType));
+    }
+
+    public static String truncateStringByCharacters(String string, int max) {
+        return string.length() > 1028 ? string.substring(0, max) : string;
+    }
+
+    public static void serverHealthCheck() {
+        HttpCaller httpCaller = new HttpCaller();
+        httpCaller.get(Page.getPageUrl());
+        Assert.assertEquals("Server is not returning success load code 200!", 200, httpCaller.getResponseCode());
     }
 }
