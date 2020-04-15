@@ -48,8 +48,8 @@ public class AbstractParentTest {
     }
 
     private WebDriver driverInit() {
-        WebDriverManager.chromedriver().setup();
-//        WebDriverManager.chromedriver().version("81").setup();
+//        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().version("81").setup();
         return new ChromeDriver();
     }
 

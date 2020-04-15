@@ -6,15 +6,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
@@ -32,11 +26,10 @@ import pages.Page;
 
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
-import java.util.List;
 
 public class HttpCaller {
 
-    private static final Logger LOG = Logger.getLogger(Page.class);
+    private Logger LOG = Logger.getLogger(getClass());
     private HttpResponse response = null;
     private String responseString = null;
     private String responseJsonString = null;
