@@ -1,12 +1,12 @@
 package parentTests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import utilities.Utils;
 import org.junit.*;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
+import utilities.Utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +49,7 @@ public class AbstractParentTest {
 
     private WebDriver driverInit() {
         WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().version("81").setup();
         return new ChromeDriver();
     }
 
@@ -60,7 +61,7 @@ public class AbstractParentTest {
     protected  void checkExpectedResult(String message, boolean actualResult) {
 
         if (!actualResult) {
-            utils.screenShot(pathToScreenShot, webDriver);
+            utils.captureScreenshot(pathToScreenShot, webDriver);
         }
 
         Assert.assertTrue(message, actualResult);

@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class TransactionsPage extends Page {
+
+    private Logger LOG = Logger.getLogger(getClass());
 
     @FindBy(id = "deal")
     private WebElement transactionsTab;

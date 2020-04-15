@@ -12,24 +12,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Utils {
-    private Logger log;
 
-    public Utils(){
-        log = Logger.getLogger(getClass());
-    }
+    private Logger LOG = Logger.getLogger(getClass());
 
     /**
      * Taking screenshot into .//target// + pathToScreenShot
      * @param pathToScreenShot
      * @param driver
      */
-    public void screenShot(String pathToScreenShot, WebDriver driver){
+    public void captureScreenshot(String pathToScreenShot, WebDriver driver){
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(scrFile, new File(pathToScreenShot));
-            log.info("ScreenShot: " + pathToScreenShot);
+            LOG.info("ScreenShot taken to: " + pathToScreenShot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +42,6 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss

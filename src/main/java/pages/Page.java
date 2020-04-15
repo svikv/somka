@@ -1,10 +1,8 @@
 package pages;
 
-import org.junit.Assert;
-import utilities.HttpCaller;
-import utilities.JsonReader;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+import utilities.HttpCaller;
+import utilities.JsonReader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class Page {
 
     protected WebDriver webDriver;
-    protected static final Logger LOG = Logger.getLogger(Page.class);
+    private Logger LOG = Logger.getLogger(getClass());
     private static JSONObject credentials = JsonReader.getJsonObject("credentials.json");
     private static String URL = (String) credentials.get("BASE_URL");
     private static String authUser = (String) credentials.get("AUTH_USER");
