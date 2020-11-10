@@ -1,4 +1,4 @@
-package parentTests;
+package loginTests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
@@ -30,7 +30,7 @@ public class AbstractParentTest {
     }
 
     @Before
-    public  void SetUp() throws Exception {
+    public void SetUp() throws Exception {
 
         pathToScreenShot = "../somka/target/screenshot/" + this.getClass().getPackage().getName() +
                 "/" + this.getClass().getSimpleName() + this.testName.getMethodName() + ".jpg";

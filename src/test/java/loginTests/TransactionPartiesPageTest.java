@@ -2,7 +2,6 @@ package loginTests;
 
 import org.junit.Assert;
 import org.junit.Test;
-import parentTests.AbstractParentTest;
 
 public class TransactionPartiesPageTest extends AbstractParentTest {
 
