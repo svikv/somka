@@ -15,7 +15,7 @@ public class TransactionsPageTest extends AbstractParentTest {
     @Test
     public void addRecord() {
         loginPage.loginToPage(user, password);
-        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
+        checkExpectedResult("Avatar isn't displayed", homePage.isAvatarDisplayed());
 
         transactions.tableView();
         int rawsBefore = transactions.countTableRows();
@@ -31,7 +31,7 @@ public class TransactionsPageTest extends AbstractParentTest {
     @Test
     public void updateRecord() {
         loginPage.loginToPage(user, password);
-        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
+        checkExpectedResult("Avatar isn't displayed", homePage.isAvatarDisplayed());
 
         transactions.tableView();
         int rawsBefore = transactions.countTableRows();

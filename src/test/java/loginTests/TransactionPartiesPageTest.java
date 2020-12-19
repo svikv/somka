@@ -9,10 +9,10 @@ public class TransactionPartiesPageTest extends AbstractParentTest {
     private String address = "Kiev";
     private String phone = "0502501256";
 
-    @Test
+//    @Ignore
     public void addRecord() {
         loginPage.loginToPage(user, password);
-        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
+        checkExpectedResult("Avatar isn't displayed", homePage.isAvatarDisplayed());
 
         transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRows();
@@ -28,7 +28,7 @@ public class TransactionPartiesPageTest extends AbstractParentTest {
     @Test
     public void deleteRecord() {
         loginPage.loginToPage(user, password);
-        checkExpectedResult("Avatar is displayed", homePage.isAvatarDisplayed());
+        checkExpectedResult("Avatar isn't displayed", homePage.isAvatarDisplayed());
 
         transactionParties.tableView();
         int rawsBefore = transactionParties.countTableRows();

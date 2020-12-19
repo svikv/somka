@@ -20,6 +20,7 @@ public class Page {
 
     protected WebDriver webDriver;
     private Logger LOG = Logger.getLogger(getClass());
+//    WebDriverWait webDriverWait = new WebDriverWait(webDriver, 1);
     private static JSONObject credentials = JsonReader.getJsonObject("credentials.json");
     private static String URL = (String) credentials.get("BASE_URL");
     private static String authUser = (String) credentials.get("AUTH_USER");
@@ -66,6 +67,15 @@ public class Page {
         }
     }
 
+//    public boolean isElementDisplayed(WebElement element){
+//        try {
+//            webDriverWait.until(ExpectedConditions.visibilityOf(element));
+//            return element.isDisplayed();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
     public boolean isElementDisplayed(WebElement element){
         try {

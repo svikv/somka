@@ -1,5 +1,4 @@
 package api;
-
 import apiResources.CurrencyValues;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -25,7 +24,7 @@ public class ApiTest {
     public void privateBankTest() {
         CurrencyValues[] currencyValues =
                 given()
-                        .contentType(ContentType.JSON)    // Header
+                        .accept(ContentType.JSON)    // Header
                         .queryParam("json")
                         .queryParam("exchange")         //adding param to URL
                         .queryParam("coursid", 5)
@@ -65,8 +64,8 @@ public class ApiTest {
         given()
                 .given()
                      .queryParam("CUSTOMER_ID", "68195")
-                        .queryParam("PASSWORD", "1234!")
-                        .queryParam("Account_No", "1")
+                     .queryParam("PASSWORD", "1234!")
+                     .queryParam("Account_No", "1")
                 .when()
                 .get(RESTAPI_DEMO_GURU99)
                 .then()

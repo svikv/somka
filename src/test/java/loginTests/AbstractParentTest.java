@@ -36,6 +36,12 @@ public class AbstractParentTest {
                 "/" + this.getClass().getSimpleName() + this.testName.getMethodName() + ".jpg";
 
         webDriver = driverInit();
+//        For working with Selenium Grid
+//        try {
+//            webDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         loginPage = new LoginPage(webDriver);
@@ -58,7 +64,7 @@ public class AbstractParentTest {
         webDriver.quit();
     }
 
-    protected  void checkExpectedResult(String message, boolean actualResult) {
+    protected void checkExpectedResult(String message, boolean actualResult) {
 
         if (!actualResult) {
             utils.captureScreenshot(pathToScreenShot, webDriver);
